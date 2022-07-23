@@ -1,0 +1,28 @@
+{
+  "name": "yemming-profiler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SarahStelljes/Yemming-Profiler.git"
+  },
+  "author": "Sarah E. Stelljes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SarahStelljes/Yemming-Profiler/issues"
+  },
+  "homepage": "https://github.com/SarahStelljes/Yemming-Profiler#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {
+    "jest": "^28.1.3"
+  }
+}
