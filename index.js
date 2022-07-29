@@ -1,5 +1,7 @@
 const inquirer = require('inquirer');
-const process = require('node:process')
+const process = require('node:process');
+
+const generatePage = require('./src/page-template');
 
 const promptTeamManager = () => {
     return inquirer.prompt([
