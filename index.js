@@ -65,10 +65,14 @@ const promptTeamManager = () => {
 
 const promptMenu = data => {
     if(!data.employee){
-        data.employee;
+        data.employee = {};
+        console.log(`Before Manager:
+        ${data}
+        `);
         if(!data.employee.manager){
             const manager = new Manager(data.name, data.managerEmail, data.employeeID, data.officeNumber);
-    
+            data = {};
+            data.employee = {};
             data.employee.manager = {
                 role: manager.getRole(),
                 name: manager.getName(),
@@ -76,6 +80,10 @@ const promptMenu = data => {
                 id: manager.getId(),
                 roleSpecific: manager.officeNumber
             };
+            
+            console.log(`After Manager:
+            ${data}
+            `);
         }
     }
     console.log(`
