@@ -65,26 +65,19 @@ const promptTeamManager = () => {
 
 const promptMenu = data => {
     if(!data.employee){
-        data.employee = {};
-        console.log(`Before Manager:
-        ${data}
-        `);
-        if(!data.employee.manager){
-            const manager = new Manager(data.name, data.managerEmail, data.employeeID, data.officeNumber);
-            data = {};
-            data.employee = {};
-            data.employee.manager = {
+        const manager = new Manager(data.name, data.managerEmail, data.employeeID, data.officeNumber);
+        data = { };
+        data.employee = {
+            manager:{
                 role: manager.getRole(),
                 name: manager.getName(),
                 email: manager.getEmail(),
                 id: manager.getId(),
                 roleSpecific: manager.officeNumber
-            };
-            
-            console.log(`After Manager:
-            ${data}
-            `);
+            }
         }
+    } else {
+        data.option = '';
     }
     console.log(`
     ===================
@@ -107,24 +100,22 @@ const promptMenu = data => {
             } else {
                 data.option = 'Engineer';
             }
-            return data;
         } else if(menu.menuOptions === 'Intern'){
             if(!data.option){
                 data.option = 'Intern';
             } else {
                 data.option = 'Intern';
             }
-            return data;
         } else if(menu.menuOptions === 'Finish Building Your Team'){
             if(!data.option){
                 data.option = 'finish build';
             } else {
                 data.option = 'finish build';
             }
-            return data;
         }
+        return data;
     });
-}
+};
 
 const makeEngineer = data => {
     if(!data.employee.engineers){
@@ -201,7 +192,7 @@ const makeEngineer = data => {
         });
         return data;
     })
-}
+};
 
 const makeIntern = data => {
     if(!data.employee.interns){
@@ -278,8 +269,9 @@ const makeIntern = data => {
         });
         return data;
     })
-}
-const finsihBuild = employee => {
+};
+const finsihBuild = data => {
+    const employee = data.employee;
     var employees = [];
     employees.push(employee.manager);
 
@@ -293,33 +285,38 @@ const finsihBuild = employee => {
             employees.push(employee.interns[i]);
         };
     }
-    console.log(employees);
-    // return employees;
-}
+    return Promise.resolve(employees);
+};
 
-promptTeamManager()
-    .then(promptMenu)
-    .then(function(data){
+const dataOptions = data => {
+    promptMenu(data)
+    .then(data => {
         if(data.option === 'Engineer'){
-            makeEngineer(data);
+            makeEngineer(data).then(data => {dataOptions(data)});
         } else if(data.option === 'Intern'){
-            makeIntern(data);
+            makeIntern(data).then(data => {dataOptions(data)});
         } else {
-            finsihBuild(data.employee)
+            finsihBuild(data)
                 .then(employeeDataArr => {
-                    return generatePage(employeeDataArr);
+                    const dataArr = generatePage(employeeDataArr);
+                    return dataArr;
                 })
                 .then(pageHTML => {
                     return writeFile(pageHTML);
                 })
                 .then(writeFileResponse => {
-                    console.log(writeFileResponse);
+                    console.log(writeFileResponse.message);
+                    return copyFile();
                 })
                 .then(copyFileResponse => {
-                    console.log(copyFileResponse);
+                    console.log(copyFileResponse.message);
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
     });
+};
+
+promptTeamManager()
+    .then(dataOptions);
