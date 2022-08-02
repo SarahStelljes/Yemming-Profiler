@@ -17,7 +17,10 @@ const questions = () => {
                 if(teamManagerNameInp){
                     return true;
                 } else {
-                    console.log("Please enter the team manager's name!");
+                    console.log(`
+                    =====================================
+                    Please enter the team manager's name!
+                    =====================================`);
                     return false;
                 }
             }
@@ -25,12 +28,21 @@ const questions = () => {
         {
             type: 'input',
             name: 'employeeID',
-            message: "Please enter the team manager's employee ID",
+            message: "Please enter the team manager's employee ID number.",
             validate: teamManagerID => {
-                if(teamManagerID){
+                if(teamManagerID && !isNaN(teamManagerID)){
                     return true;
+                } else if(teamManagerID && isNaN(teamManagerID)) {
+                    console.log(`
+                    ================================
+                    The manager ID must be a number!
+                    ================================`);
+                    return false;
                 } else {
-                    console.log("You must enter the team manager's ID!");
+                    console.log(`
+                    =====================================
+                    You must enter the team manager's ID!
+                    =====================================`);
                     return false;
                 }
             }
@@ -38,12 +50,15 @@ const questions = () => {
         {
             type: 'input',
             name: 'managerEmail',
-            message: "Please enter the team manager's email address.",
+            message: "Please enter the team manager's email address. The email must contain an '@' and a '.com'",
             validate: managersEmail => {
-                if(managersEmail){
+                if(managersEmail.length > 5 && managersEmail.includes('@') && managersEmail.includes('.com')){
                     return true;
                 } else {
-                    console.log("You must enter the team manager's email!");
+                    console.log(`
+                    ================================================
+                    You didn't enter the requirements for the email!
+                    ================================================`);
                     return false;
                 }
             }
@@ -53,10 +68,19 @@ const questions = () => {
             name: 'officeNumber',
             message: "Enter the team manager's office number.",
             validate: officeNum => {
-                if(officeNum){
+                if(officeNum && !isNaN(officeNum)){
                     return true;
+                } else if(officeNum && isNaN(officeNum)) {
+                    console.log(`
+                    ========================
+                    You must enter a number!
+                    ========================`);
+                    return false;
                 } else {
-                    console.log("You must enter the team manager's office number!");
+                    console.log(`
+                    ================================================
+                    You must enter the team manager's office number!
+                    ================================================`);
                     return false;
                 }
             }
@@ -151,7 +175,10 @@ const makeEngineer = data => {
                 if(engName){
                     return true;
                 } else {
-                    console.log('You need to enter a name!');
+                    console.log(`
+                    =========================
+                    You need to enter a name!
+                    =========================`);
                     return false;
                 }
             }
@@ -159,12 +186,21 @@ const makeEngineer = data => {
         {
             type: 'input',
             name: 'engineerID',
-            message: "What is the Engineer's ID?",
+            message: "What is the Engineer's employee ID?",
             validate: engID => {
-                if(engID){
+                if(engID && !isNaN(engID)){
                     return true;
+                } else if (engID && isNaN(engID)){
+                    console.log(`
+                    ========================
+                    You must enter a number!
+                    ========================`);
+                    return false;
                 } else {
-                    console.log("You must input the engineer's ID!");
+                    console.log(`
+                    =================================
+                    You must input the engineer's ID!
+                    =================================`);
                     return false;
                 }
             }
@@ -172,12 +208,15 @@ const makeEngineer = data => {
         {
             type: 'input',
             name: 'engineerEmail',
-            message: "What is the Engineer's email?",
+            message: "What is the Engineer's email? Must include '@' and '.com'.",
             validate: engEmail => {
-                if(engEmail){
+                if(engEmail.length > 5 && engEmail.includes('@') && engEmail.includes('.com')){
                     return true;
                 } else {
-                    console.log("You must input the engineer's email!");
+                    console.log(`
+                    =================================================================
+                    You must input the engineer's email with the correct information!
+                    =================================================================`);
                     return false;
                 }
             }
@@ -190,7 +229,10 @@ const makeEngineer = data => {
                 if(engGitHub){
                     return true;
                 } else {
-                    console.log("You must input the engineer's GitHub username!");
+                    console.log(`
+                    ==============================================
+                    You must input the engineer's GitHub username!
+                    ==============================================`);
                     return false;
                 }
             }
@@ -232,7 +274,10 @@ const makeIntern = data => {
                 if(nameOfIntern){
                     return true;
                 } else {
-                    console.log("You must give the intern a name!");
+                    console.log(`
+                    ================================
+                    You must give the intern a name!
+                    ================================`);
                     return false;
                 }
             }
@@ -240,12 +285,21 @@ const makeIntern = data => {
         {
             type: 'input',
             name: 'internID',
-            message: "Please enter the intern's ID.",
+            message: "Please enter the intern's employee ID. Must be a number.",
             validate: internID => {
-                if(internID){
+                if(internID && !isNaN(internID)){
                     return true;
+                } else if(internID && isNaN(internID)){
+                    console.log(`
+                    ========================
+                    You must enter a number!
+                    ========================`);
+                    return false;
                 } else {
-                    console.log("You must enter the intern's ID!");
+                    console.log(`
+                    ===============================
+                    You must enter the intern's ID!
+                    ===============================`);
                     return false;
                 }
             }
@@ -255,10 +309,13 @@ const makeIntern = data => {
             name: 'internEmail',
             message: "Please enter the intern's email.",
             validate: internEmail => {
-                if(internEmail){
+                if(internEmail.length > 5 && internEmail.includes("@") && internEmail.includes('.com')){
                     return true;
                 } else {
-                    console.log("You must enter the intern's email!");
+                    console.log(`
+                    ======================================================================
+                    You must enter the intern's email! Make sure the requirements are met!
+                    ======================================================================`);
                     return false;
                 }
             }
@@ -271,7 +328,10 @@ const makeIntern = data => {
                 if(internsSchool){
                     return true;
                 } else {
-                    console.log("You must enter the intern's school's name!");
+                    console.log(`
+                    ==========================================
+                    You must enter the intern's school's name!
+                    ==========================================`);
                     return false;
                 }
             }
